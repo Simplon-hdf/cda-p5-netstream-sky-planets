@@ -1,14 +1,14 @@
 # Règle de gestion
 
 ## CINÉPHILE
-**RG1** : L'utilisateur doit avoir un nom  
-**RG2** : L'utilisateur doit avoir un prénom  
-**RG3** : L'utilisateur doit avoir un e-mail  
-**RG4** : L'utilisateur peut avoir une liste de rôles  
-**RG5** : L'utilisateur peut avoir une liste de films préférés  
-**RG6** : L'utilisateur peut faire une recherche par acteur ou film  
-**RG7** : L'utilisateur doit avoir un mot de passe  
-**RG8** : L'utilisateur peut s'inscrire, se connecter et se déconnecter  
+**RG1** : Un cinéphile doit avoir un nom  
+**RG2** : Un cinéphile doit avoir un prénom  
+**RG3** : Un cinéphile doit avoir un e-mail  
+**RG4** : Un cinéphile peut avoir une liste de rôles  
+**RG5** : Un cinéphile peut avoir une liste de films préférés  
+**RG6** : Un cinéphile peut faire une recherche par acteur ou film  
+**RG7** : Un cinéphile doit avoir un mot de passe  
+**RG8** : Un cinéphile peut s'inscrire, se connecter et se déconnecter
 
 ## ACTEUR  
 **RG9** : Un acteur doit avoir un nom  
