@@ -1,6 +1,6 @@
 # Règle de gestion
 
-## UTILISATEUR  
+## CINÉPHILE
 **RG1** : L'utilisateur doit avoir un nom  
 **RG2** : L'utilisateur doit avoir un prénom  
 **RG3** : L'utilisateur doit avoir un e-mail  
@@ -14,7 +14,7 @@
 **RG9** : Un acteur doit avoir un nom  
 **RG10** : Un acteur doit avoir un prénom  
 **RG11** : Un acteur doit avoir une date de naissance  
-**RG12** : Un acteur doit avoir un rôle dans un ou plusieur films
+**RG12** : Un acteur doit avoir un rôle dans un ou plusieurs films
 
 ## FILM  
 **RG13** : Un film doit avoir un titre  
