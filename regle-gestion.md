@@ -34,3 +34,11 @@
 **RG23** : Un rôle doit avoir un nom.  
 **RG24** : Un rôle doit être attribué dans un film.  
 **RG25** : Un rôle doit être joué par un acteur.
+
+## ARCHIVE 
+**RG26** : L'archive doit contenir l'identifiant de l'utilisateur ayant modifié son profil.  
+**RG27** : L'archive doit contenir le nom du champ ayant été modifié.  
+**RG28** : L'archive doit contenir l'ancienne valeur du champ modifié.  
+**RG29** : L'archive doit contenir la nouvelle valeur du champ modifié.  
+**RG30** : L'archive doit contenir la date de la modification.
+
