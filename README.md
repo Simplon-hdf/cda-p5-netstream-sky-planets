@@ -7,7 +7,7 @@ NetStream Sky Planets est une plateforme innovante de gestion de films, permetta
 ## ✨ Fonctionnalités
 
 ### 🎭 Pour les Cinéphiles
-- 👤 Création et gestion de compte personnalisé
+- 👤 Création et gestion de compte
 - 🔍 Recherche avancée par acteur ou film
 - ❤️ Création de listes de films et rôles préférés
 - 🔐 Système d'authentification sécurisé
