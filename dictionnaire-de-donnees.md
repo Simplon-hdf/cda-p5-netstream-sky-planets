@@ -5,7 +5,7 @@
 |------------------|--------------------------------------|------|----------------------------|--------|----------------------------------------|
 | id_film          | Identifiant du film                  | AN   | xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx | 36     | a6b12f6a-d1d3-41db-bafc-8df0055e5242   |
 | titre            | Titre du film                        | AN   | -                          | 250    | Minecraft, le film                    |
-| annee_de_sortie  | L'année de sortie du film            | D    | AAAA                       | 4      | 2025                                   |
+| annee_de_sortie  | L'année de sortie du film            | N    | -                          | 2      | 2025                                   |
 | duree            | Durée du film en minutes             | AN   | 00h 00m                    | 7      | 01h 41m                                |
 
 ## ROLE_FILM
