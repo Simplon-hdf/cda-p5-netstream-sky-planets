@@ -29,7 +29,7 @@
 | nom_cinephile    | Nom du cinéphile                     | A    | -                          | 50     | Doe                                    |
 | prenom_cinephile | Prénom du cinéphile                  | A    | -                          | 50     | John                                   |
 | email            | E-mail du cinéphile                  | AN   | -                          | 320    | exemple@example.ex                     |
-| mot_de_passe     | Empreinte du mot de passe            | AN   | -                          | 72     | P0titChat! > $argon2i$v=19$m=12,t=3,p=1$bHF3bTdmazdsNWEwMDAwMA$l3TBBjTnW3BbvU60aO0TPg |
+| mot_de_passe     | Empreinte du mot de passe            | AN   | -                          | 72     | P0titChat! > `$argon2i$v=19$m=12,t=3,p=1$bHF3bTdmazdsNWEwMDAwMA$l3TBBjTnW3BbvU60aO0TPg` |
 
 ## RÉALISATEUR
 | Nom              | Description                          | Type | Format                     | Taille | Exemples                               |
