@@ -25,12 +25,14 @@ NetStream Sky Planets est une plateforme innovante de gestion de films, permetta
 
 ## 🚀 Installation
 
-\```bash
+```bash
 # Cloner le repository
-git clone https://github.com/Simplon-hdf/cda-p5-netstream-sky-planets
+https://github.com/Simplon-hdf/cda-p5-netstream-sky-planets
 
 # Se déplacer dans le dossier
 cd cda-p5-netstream-sky-planets
+```
+
 
 ## 📚 Documentation
 
@@ -46,7 +48,6 @@ Les contributions sont les bienvenues ! N'hésitez pas à :
 3. 📝 Commiter vos changements
 4. 🚀 Pusher vers la branche
 5. 🎉 Ouvrir une Pull Request
-
 
 ## 📞 Contact
 
