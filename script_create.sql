@@ -9,7 +9,7 @@ CREATE TABLE realisateur (
 CREATE TABLE film (
     id_film UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     titre VARCHAR(250) NOT NULL,
-    annee_de_sortie SMALLINT NOT NULL,
+    date_de_sortie DATE NOT NULL,
     duree TIME NOT NULL,
     id_realisateur UUID NOT NULL,
     FOREIGN KEY (id_realisateur) REFERENCES realisateur(id_realisateur)
@@ -53,9 +53,9 @@ CREATE TABLE film_preferer (
 
 CREATE TABLE jouer (
     id_acteur UUID NOT NULL,
-    id_film UUID NOT NULL,
+    id_role UUID NOT NULL,
     FOREIGN KEY (id_acteur) REFERENCES acteur(id_acteur),
-    FOREIGN KEY (id_film) REFERENCES film(id_film)
+    FOREIGN KEY (id_role) REFERENCES role_film(id_role)
 );
 
 CREATE TABLE archive (
