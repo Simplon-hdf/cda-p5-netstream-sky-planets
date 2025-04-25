@@ -1,0 +1,47 @@
+INSERT INTO realisateur (nom_realisateur, prenom_realisateur) VALUES
+('flet', 'Tarti'),
+('Courant', 'Theo'),
+('Halle', 'Anne'),
+('Dupont', 'Jean'),
+('Martin', 'Marie'),
+('Girard', 'Pierre'),
+('Lefevre', 'Sophie'),
+('Dubois', 'Luc');
+
+INSERT into film (titre, date_de_sortie, duree, id_realisateur) VALUES
+('Minecraft film', '2025-04-02', '01:41', 'af6adc2f-f1d6-4e47-bd54-970ddddc7b09'),
+('Nemo', '2003-11-26', '01:40','cf543c7d-fb66-4a58-9037-d477bd1840b7'),
+('Sonic', '2020-02-09', '01:39','af6adc2f-f1d6-4e47-bd54-970ddddc7b09');
+
+INSERT INTO role_film (nom_role, id_film) VALUES
+('STEVE', '36887af2-e44c-4edb-a81d-775015025ef5'),
+('NEMO', 'abfe5fe6-47ea-4b44-8efa-9823252162fa'),
+('SONIC', 'cc8d9077-91fd-4f17-b396-d72f54d06524');
+
+insert into acteur (nom_acteur, prenom_acteur, date_de_naissance) values
+('black', 'jack', '1969-08-29'),
+('Gould', 'Alenxander', '1958-04-29'),
+('Schwartz', 'Ben', '1986-09-26');
+
+insert into cinephile (nom_cinephile, prenom_cinephile,email,mot_de_passe)
+values
+('con', 'Jean','con.Jean@gmail.com','k8T$zL2p@Wy34Q!rX#VuM7ejFtNB5h&1GZx*DqoRLa93s^AYCHUbEKvm6wnPJitg'),
+('chan', 'jacky', 'jacky@gmail.com','Xv#R4yEmgBZP6uC2&!AqtL$V7NdxMpFJWs@9oK3hnYzfjHb^GEclTri58DQwXU0*'),
+('delon', 'alain', 'alain.delon@gmail.com','@z4TNuDqXy2W!cREoFv#GjmYMp9&5BKJaihsVZLxlUtrA6HnbPfQkCg*378dSX0');
+
+insert into film_preferer (id_cinephile, id_film) values
+('99f5791e-84a3-4f17-b4d3-fb7477108716','36887af2-e44c-4edb-a81d-775015025ef5'),
+('10d5e101-ec0c-41f2-b341-c7708853546e','cc8d9077-91fd-4f17-b396-d72f54d06524'),
+('10d5e101-ec0c-41f2-b341-c7708853546e','36887af2-e44c-4edb-a81d-775015025ef5'),
+('a157105e-f8cd-4cfd-aa07-3d742d56f95c','abfe5fe6-47ea-4b44-8efa-9823252162fa');
+
+insert into role_preferer (id_cinephile, id_role) values
+('99f5791e-84a3-4f17-b4d3-fb7477108716','9e525fe1-44c5-40a1-ad3a-cf0299dad6a9'),
+('a157105e-f8cd-4cfd-aa07-3d742d56f95c','eca414a4-5180-453d-be83-60d1597c8e17'),
+('10d5e101-ec0c-41f2-b341-c7708853546e','9e525fe1-44c5-40a1-ad3a-cf0299dad6a9'),
+('10d5e101-ec0c-41f2-b341-c7708853546e','754674f2-a803-4694-9bcd-4548f767e63f');
+
+insert into jouer (id_acteur, id_role) values
+('3539e136-00de-43f7-9858-20160e76ecbb','9e525fe1-44c5-40a1-ad3a-cf0299dad6a9'),
+('9a54998c-46c8-45a8-ae77-d9bf48be4230','eca414a4-5180-453d-be83-60d1597c8e17'),
+('8f23a168-1438-4166-a4a0-7202e450659f','754674f2-a803-4694-9bcd-4548f767e63f');
