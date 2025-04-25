@@ -32,6 +32,89 @@ https://github.com/Simplon-hdf/cda-p5-netstream-sky-planets
 # Se déplacer dans le dossier
 cd cda-p5-netstream-sky-planets
 ```
+```sql
+-- Select film et date par ordre du plus recent au plus ancien
+SELECT titre_film, date_sortie_film
+FROM film
+ORDER BY date_sortie_film DESC;
+
+-- requete age en dessous de 30
+SELECT nom_acteur, prenom_acteur, age_acteur
+FROM (
+  SELECT nom_acteur, prenom_acteur, TRUNC((CURRENT_DATE - date_de_naissance)/365.25) "age_acteur"
+  FROM acteur
+)
+WHERE age_acteur > 30 
+ORDER BY nom_acteur;
+
+-- Select les acteurs principaux d'un film donné
+SELECT 
+    a.nom_acteur,
+    a.prenom_acteur,
+    rf.nom_role,
+    f.titre
+FROM 
+    acteur a
+    INNER JOIN jouer j ON a.id_acteur = j.id_acteur
+    INNER JOIN role_film rf ON j.id_role = rf.id_role
+    INNER JOIN film f ON rf.id_film = f.id_film
+WHERE 
+    f.titre like '%Minecraft%'
+ORDER BY 
+    a.nom_acteur, 
+    a.prenom_acteur;
+
+-- Select le film par rapport au acteur
+SELECT  
+    a.nom_acteur,
+    a.prenom_acteur,
+    rf.nom_role,
+    f.titre
+FROM 
+    acteur a
+    INNER JOIN jouer j ON a.id_acteur = j.id_acteur
+    INNER JOIN role_film rf ON j.id_role = rf.id_role
+    INNER JOIN film f ON rf.id_film = f.id_film
+WHERE 
+    lower(a.nom_acteur) like '%jack%' AND lower(a.prenom_acteur) like '%black%'
+ORDER BY 
+    f.titre;
+
+-- Ajouter un film
+insert into film (titre, annee_de_sortie, duree, id_realisateur) values ('mario film', 2023, '01:32', '43748c8d-df99-426d-9903-792d1cfa84fb'); 
+
+-- Ajouter un acteur
+insert into acteur (nom_acteur, prenom_acteur, date_de_naissance) values ('Chris', 'pratt', '1979-06-21');
+
+-- Modifier le titre du film
+UPDATE film SET titre = 'Super Mario Bros, le film' WHERE titre = 'mario film';
+
+-- Afficher les 3 derniers acteurs ajoutés
+select * from acteur limit 3 offset (SELECT (count(0)-3) FROM acteur);
+
+-- Suprimer un acteur
+delete from acteur where nom_acteur = 'black';
+
+-- creer une procedure stockée permettant d'afficher la liste des films d'un realisateur en parametre
+CREATE OR REPLACE FUNCTION film_realisateur(nom VARCHAR(50), prenom VARCHAR(50))
+RETURNS TABLE(titre VARCHAR(250), nom_realisateur VARCHAR(50), prenom_realisateur VARCHAR(50))
+AS $$
+BEGIN
+RETURN QUERY
+SELECT film.titre, r.nom_realisateur,r.prenom_realisateur
+FROM film
+JOIN realisateur r
+ON r.id_realisateur = film.id_realisateur
+WHERE r.nom_realisateur = nom            
+AND r.prenom_realisateur = prenom;
+END;
+$$ LANGUAGE plpgsql;
+-- appeler la procedure
+select * from film_realisateur('Jelenic', 'Michael');
+-- gerer le CRUD pour l'ajout d'un nouvelles acteur au sein d'un film via une procedure stockée
+
+
+```
 
 
 ## 📚 Documentation
