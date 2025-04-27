@@ -8,17 +8,6 @@ Notre application NetStream Sky Planets nécessite un SGBDR capable de :
 - Offrir de bonnes performances en lecture (recherches fréquentes)
 - Gérer efficacement les modifications avec système d'archivage
 
-## 🔍 Critères d'Évaluation
-
-| Critère | Description | Pondération |
-|---------|-------------|-------------|
-| Performance | Vitesse d'exécution des requêtes | 25% |
-| Fiabilité | Stabilité et intégrité des données | 20% |
-| Scalabilité | Capacité à gérer la croissance | 15% |
-| Sécurité | Protection des données | 15% |
-| Coût | Licence et maintenance | 15% |
-| Communauté | Support et ressources disponibles | 10% |
-
 ## 📈 Comparaison des SGBDR
 
 ### PostgreSQL
@@ -104,19 +93,6 @@ Après analyse approfondie, nous avons choisi **PostgreSQL** pour les raisons su
 - Capable de gérer des millions d'enregistrements
 - Supporte la réplication et le clustering
 - Evolutif avec les besoins du projet
-
-## 📊 Tableau Comparatif Final
-
-| Critère | PostgreSQL | MySQL | MariaDB | Oracle |
-|---------|------------|-------|----------|---------|
-| Performance | 9/10 | 8/10 | 8/10 | 9/10 |
-| Fiabilité | 9/10 | 7/10 | 7/10 | 9/10 |
-| Scalabilité | 8/10 | 7/10 | 7/10 | 9/10 |
-| Sécurité | 9/10 | 8/10 | 8/10 | 9/10 |
-| Coût | 10/10 | 9/10 | 10/10 | 3/10 |
-| Communauté | 9/10 | 9/10 | 7/10 | 7/10 |
-| **Total** | **54/60** | **48/60** | **47/60** | **46/60** |
-
 
 ## 📝 Conclusion
 
