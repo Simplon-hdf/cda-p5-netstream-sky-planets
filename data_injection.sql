@@ -17,11 +17,14 @@ INSERT INTO role_film (nom_role, id_film) VALUES
 ('STEVE', '36887af2-e44c-4edb-a81d-775015025ef5'),
 ('NEMO', 'abfe5fe6-47ea-4b44-8efa-9823252162fa'),
 ('SONIC', 'cc8d9077-91fd-4f17-b396-d72f54d06524');
+INSERT INTO acteur (id_acteur, nom_acteur, prenom_acteur, date_de_naissance) VALUES
+('92e6d1f0-34f4-4526-a6e4-d1e4014705d5', 'Schwartz', 'Ben', '1981-09-15'),      -- Sonic
+('b9afae46-27ce-43b1-805f-c53db0a2beb4', 'Pratt', 'Chris', '1979-06-21'),       -- Mario
+('e2f7311c-a105-42ce-9755-57627c8799c8', 'Myers', 'Mike', '1963-05-25'),        -- Shrek
+('39a0a16e-9add-420b-9bac-5ed440cb2966', 'Gould', 'Alexander', '1994-04-04'),   -- Nemo
+('954f0832-d337-410a-944e-1f4d8fe34f01', 'Burtt', 'Ben', '1948-07-12'),         -- Wall-E
+('793420c4-71f4-43e5-a76b-ea47fd346d0a', 'Black', 'Jack', '1969-08-29');        -- Steve
 
-insert into acteur (nom_acteur, prenom_acteur, date_de_naissance) values
-('black', 'jack', '1969-08-29'),
-('Gould', 'Alenxander', '1958-04-29'),
-('Schwartz', 'Ben', '1986-09-26');
 
 insert into cinephile (nom_cinephile, prenom_cinephile,email,mot_de_passe)
 values
