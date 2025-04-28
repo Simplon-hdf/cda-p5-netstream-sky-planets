@@ -34,11 +34,11 @@ INSERT INTO cinephile (id_cinephile, nom_cinephile, prenom_cinephile, email, mot
 ('2bf1263d-9015-4896-94c5-9cf5be3821d9', 'Chan', 'Jacky', 'jacky@gmail.com','Xv#R4yEmgBZP6uC2&!AqtL$V7NdxMpFJWs@9oK3hnYzfjHb^GEclTri58DQwXU0*'),
 ('2a689e64-7292-4a28-bdac-836f731bd064', 'Delon', 'Alain', 'alain.delon@gmail.com','@z4TNuDqXy2W!cREoFv#GjmYMp9&5BKJaihsVZLxlUtrA6HnbPfQkCg*378dSX0');
 
-insert into film_preferer (id_cinephile, id_film) values
-('99f5791e-84a3-4f17-b4d3-fb7477108716','36887af2-e44c-4edb-a81d-775015025ef5'),
-('10d5e101-ec0c-41f2-b341-c7708853546e','cc8d9077-91fd-4f17-b396-d72f54d06524'),
-('10d5e101-ec0c-41f2-b341-c7708853546e','36887af2-e44c-4edb-a81d-775015025ef5'),
-('a157105e-f8cd-4cfd-aa07-3d742d56f95c','abfe5fe6-47ea-4b44-8efa-9823252162fa');
+INSERT INTO film_preferer (id_cinephile, id_film) VALUES
+('10f251b7-c76a-4ea0-aace-09ff0574d1da', '0ded922f-0e81-460d-be1f-a6e36303f508'),
+('2bf1263d-9015-4896-94c5-9cf5be3821d9', 'b224f19a-acf1-46c3-b70b-ee848fc2d2c8'),
+('2a689e64-7292-4a28-bdac-836f731bd064', 'cd219724-f963-436f-abec-e2bd31c2f9b7'),
+('2a689e64-7292-4a28-bdac-836f731bd064', '9a6b530b-a60e-4905-a858-82ec2c3bd85b');
 
 insert into role_preferer (id_cinephile, id_role) values
 ('99f5791e-84a3-4f17-b4d3-fb7477108716','9e525fe1-44c5-40a1-ad3a-cf0299dad6a9'),
