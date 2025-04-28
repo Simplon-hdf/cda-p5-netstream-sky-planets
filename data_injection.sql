@@ -1,12 +1,9 @@
-INSERT INTO realisateur (nom_realisateur, prenom_realisateur) VALUES
-('flet', 'Tarti'),
-('Courant', 'Theo'),
-('Halle', 'Anne'),
-('Dupont', 'Jean'),
-('Martin', 'Marie'),
-('Girard', 'Pierre'),
-('Lefevre', 'Sophie'),
-('Dubois', 'Luc');
+INSERT INTO realisateur (id_realisateur, nom_realisateur, prenom_realisateur) VALUES
+('48173b50-0f9e-4eef-9d3e-682b015cb5ce', 'Hess', 'Jared'),      -- Minecraft
+('638d1c05-5581-4c29-b635-26ebb7f2dd72', 'Stanton', 'Andrew'),  -- Nemo
+('c1f23395-6f46-4af4-89ba-b16132e26656', 'Fowler', 'Jeff'),     -- Sonic
+('ecf6c7e5-1a9c-4341-b756-4a9654de192b', 'Jelenic', 'Michael'), -- Mario
+('21552e22-134d-4b17-bb7a-18b8a424f954', 'Jenson', 'Vicky');    -- Shrek
 
 INSERT into film (titre, date_de_sortie, duree, id_realisateur) VALUES
 ('Minecraft film', '2025-04-02', '01:41', 'af6adc2f-f1d6-4e47-bd54-970ddddc7b09'),
