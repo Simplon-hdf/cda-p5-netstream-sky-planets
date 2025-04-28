@@ -193,6 +193,47 @@ $$;
 -- appeler la fonction
 select * from recherche_acteur('black', 'jack');
 
+
+-- Créer un acteur et un rôle pour un film
+create or replace procedure create_acteur_role(
+    in p_id_acteur uuid,
+    in p_prenom_acteur varchar(50),
+    in p_nom_acteur varchar(50), 
+    in p_date_de_naissance date,
+    in p_nom_role varchar(150),
+    in p_id_role uuid,
+    in p_id_film uuid
+) 
+language plpgsql 
+as $$
+declare
+    v_exists boolean;
+begin
+    SELECT EXISTS(SELECT 1 FROM acteur WHERE id_acteur = p_id_acteur) INTO v_exists;
+
+    IF NOT v_exists THEN
+        INSERT INTO acteur (id_acteur, prenom_acteur, nom_acteur, date_de_naissance) VALUES
+            (p_id_acteur, p_prenom_acteur, p_nom_acteur, p_date_de_naissance);
+    END IF;
+
+
+    SELECT EXISTS(SELECT 1 FROM role_film WHERE id_role = p_id_role) INTO v_exists;
+
+    IF NOT v_exists THEN
+        INSERT INTO role_film (id_role, nom_role, id_film) VALUES
+            (p_id_role, p_nom_role, p_id_film);
+    END IF;
+
+
+    INSERT INTO jouer (id_acteur, id_role) VALUES
+        (p_id_acteur, p_id_role);
+end;
+$$;
+
+-- Appeler la fonction create_acteur_role (Exemple: Chuck Norris joue Dieu dans Minecraft)
+call create_acteur_role('567e31c2-a4bd-4b4a-a096-ec32e643936c', 'Chuck', 'Norris', '1985-05-10', 'Dieu', 'e5a75a4f-713d-4392-b1d3-d130fc48d446', 'cd219724-f963-436f-abec-e2bd31c2f9b7');
+
+
 -- trigger pour la table archive qui vient ce mettre a jour lorsque l'on modifie une table
 
 
