@@ -29,12 +29,10 @@ INSERT INTO acteur (id_acteur, nom_acteur, prenom_acteur, date_de_naissance) VAL
 ('954f0832-d337-410a-944e-1f4d8fe34f01', 'Burtt', 'Ben', '1948-07-12'),         -- Wall-E
 ('793420c4-71f4-43e5-a76b-ea47fd346d0a', 'Black', 'Jack', '1969-08-29');        -- Steve
 
-
-insert into cinephile (nom_cinephile, prenom_cinephile,email,mot_de_passe)
-values
-('con', 'Jean','con.Jean@gmail.com','k8T$zL2p@Wy34Q!rX#VuM7ejFtNB5h&1GZx*DqoRLa93s^AYCHUbEKvm6wnPJitg'),
-('chan', 'jacky', 'jacky@gmail.com','Xv#R4yEmgBZP6uC2&!AqtL$V7NdxMpFJWs@9oK3hnYzfjHb^GEclTri58DQwXU0*'),
-('delon', 'alain', 'alain.delon@gmail.com','@z4TNuDqXy2W!cREoFv#GjmYMp9&5BKJaihsVZLxlUtrA6HnbPfQkCg*378dSX0');
+INSERT INTO cinephile (id_cinephile, nom_cinephile, prenom_cinephile, email, mot_de_passe) VALUES
+('10f251b7-c76a-4ea0-aace-09ff0574d1da', 'Bon', 'Jean','bon.jean@gmail.com','k8T$zL2p@Wy34Q!rX#VuM7ejFtNB5h&1GZx*DqoRLa93s^AYCHUbEKvm6wnPJitg'),
+('2bf1263d-9015-4896-94c5-9cf5be3821d9', 'Chan', 'Jacky', 'jacky@gmail.com','Xv#R4yEmgBZP6uC2&!AqtL$V7NdxMpFJWs@9oK3hnYzfjHb^GEclTri58DQwXU0*'),
+('2a689e64-7292-4a28-bdac-836f731bd064', 'Delon', 'Alain', 'alain.delon@gmail.com','@z4TNuDqXy2W!cREoFv#GjmYMp9&5BKJaihsVZLxlUtrA6HnbPfQkCg*378dSX0');
 
 insert into film_preferer (id_cinephile, id_film) values
 ('99f5791e-84a3-4f17-b4d3-fb7477108716','36887af2-e44c-4edb-a81d-775015025ef5'),
