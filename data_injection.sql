@@ -5,7 +5,7 @@ INSERT INTO realisateur (id_realisateur, nom_realisateur, prenom_realisateur) VA
 ('ecf6c7e5-1a9c-4341-b756-4a9654de192b', 'Jelenic', 'Michael'), -- Mario
 ('21552e22-134d-4b17-bb7a-18b8a424f954', 'Jenson', 'Vicky');    -- Shrek
 
-INSERT into film (id_film, titre, date_de_sortie, duree, id_realisateur) VALUES
+INSERT INTO film (id_film, titre, date_de_sortie, duree, id_realisateur) VALUES
 ('cd219724-f963-436f-abec-e2bd31c2f9b7', 'Minecraft, le film', '2025-04-02', '01:41', '48173b50-0f9e-4eef-9d3e-682b015cb5ce'),          -- Jared Hess
 ('5dbfcfbd-395f-4986-ab7d-d231f97f2f56', 'Le Monde de Nemo', '2003-11-26', '01:40', '638d1c05-5581-4c29-b635-26ebb7f2dd72'),            -- Andrew Stanton
 ('34b9718c-f98d-417f-8064-b3f277d0bfc3', 'Wall-E', '2008-07-30', '01:37', '638d1c05-5581-4c29-b635-26ebb7f2dd72'),                      -- Andrew Stanton
@@ -13,10 +13,14 @@ INSERT into film (id_film, titre, date_de_sortie, duree, id_realisateur) VALUES
 ('0ded922f-0e81-460d-be1f-a6e36303f508', 'Super Mario Bros., le film', '2023-04-05', '01:32', 'ecf6c7e5-1a9c-4341-b756-4a9654de192b'),  -- Michael Jelernic
 ('9a6b530b-a60e-4905-a858-82ec2c3bd85b', 'Shrek', '2001-07-04', '01:29', '21552e22-134d-4b17-bb7a-18b8a424f954');                       -- Vicky Jenson
 
-INSERT INTO role_film (nom_role, id_film) VALUES
-('STEVE', '36887af2-e44c-4edb-a81d-775015025ef5'),
-('NEMO', 'abfe5fe6-47ea-4b44-8efa-9823252162fa'),
-('SONIC', 'cc8d9077-91fd-4f17-b396-d72f54d06524');
+INSERT INTO role_film (id_role, nom_role, id_film) VALUES
+('465e2f1a-7473-480c-8542-188d6e0f7239', 'Sonic', 'b224f19a-acf1-46c3-b70b-ee848fc2d2c8'),
+('07bbea8d-0efd-424e-a6de-2189f40fb746', 'Mario', '0ded922f-0e81-460d-be1f-a6e36303f508'),
+('52c8fb4f-915f-4b62-bf33-6ad0df700f7d', 'Shrek', '9a6b530b-a60e-4905-a858-82ec2c3bd85b'),
+('cfb203ac-e2a9-4252-9265-96c075bb1a13', 'Nemo', '5dbfcfbd-395f-4986-ab7d-d231f97f2f56'),
+('f83a6819-c439-425e-93c1-6f4b1db6a027', 'Wall-E', '34b9718c-f98d-417f-8064-b3f277d0bfc3'),
+('28a9e047-0b66-4a85-8362-b95d8a668113', 'Steve', 'cd219724-f963-436f-abec-e2bd31c2f9b7');
+
 INSERT INTO acteur (id_acteur, nom_acteur, prenom_acteur, date_de_naissance) VALUES
 ('92e6d1f0-34f4-4526-a6e4-d1e4014705d5', 'Schwartz', 'Ben', '1981-09-15'),      -- Sonic
 ('b9afae46-27ce-43b1-805f-c53db0a2beb4', 'Pratt', 'Chris', '1979-06-21'),       -- Mario
