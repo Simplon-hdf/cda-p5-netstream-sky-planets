@@ -46,7 +46,10 @@ INSERT INTO role_preferer (id_cinephile, id_role) VALUES
 ('2a689e64-7292-4a28-bdac-836f731bd064', '28a9e047-0b66-4a85-8362-b95d8a668113'), -- Alain Delon - Steve
 ('2a689e64-7292-4a28-bdac-836f731bd064', '52c8fb4f-915f-4b62-bf33-6ad0df700f7d'); -- Alain Delon - Shrek
 
-insert into jouer (id_acteur, id_role) values
-('3539e136-00de-43f7-9858-20160e76ecbb','9e525fe1-44c5-40a1-ad3a-cf0299dad6a9'),
-('9a54998c-46c8-45a8-ae77-d9bf48be4230','eca414a4-5180-453d-be83-60d1597c8e17'),
-('8f23a168-1438-4166-a4a0-7202e450659f','754674f2-a803-4694-9bcd-4548f767e63f');
+INSERT INTO jouer (id_acteur, id_role) VALUES
+('92e6d1f0-34f4-4526-a6e4-d1e4014705d5', '465e2f1a-7473-480c-8542-188d6e0f7239'),   -- Ben Schwartz - Sonic
+('b9afae46-27ce-43b1-805f-c53db0a2beb4', '07bbea8d-0efd-424e-a6de-2189f40fb746'),   -- Chris Pratt - Mario
+('e2f7311c-a105-42ce-9755-57627c8799c8', '52c8fb4f-915f-4b62-bf33-6ad0df700f7d'),   -- Mike Myers - Shrek
+('39a0a16e-9add-420b-9bac-5ed440cb2966', 'cfb203ac-e2a9-4252-9265-96c075bb1a13'),   -- Alexander Gould - Nemo
+('954f0832-d337-410a-944e-1f4d8fe34f01', 'f83a6819-c439-425e-93c1-6f4b1db6a027'),   -- Ben Burtt - Wall-E
+('793420c4-71f4-43e5-a76b-ea47fd346d0a', '28a9e047-0b66-4a85-8362-b95d8a668113');   -- Jack Black - Steve
