@@ -40,11 +40,11 @@ INSERT INTO film_preferer (id_cinephile, id_film) VALUES
 ('2a689e64-7292-4a28-bdac-836f731bd064', 'cd219724-f963-436f-abec-e2bd31c2f9b7'),
 ('2a689e64-7292-4a28-bdac-836f731bd064', '9a6b530b-a60e-4905-a858-82ec2c3bd85b');
 
-insert into role_preferer (id_cinephile, id_role) values
-('99f5791e-84a3-4f17-b4d3-fb7477108716','9e525fe1-44c5-40a1-ad3a-cf0299dad6a9'),
-('a157105e-f8cd-4cfd-aa07-3d742d56f95c','eca414a4-5180-453d-be83-60d1597c8e17'),
-('10d5e101-ec0c-41f2-b341-c7708853546e','9e525fe1-44c5-40a1-ad3a-cf0299dad6a9'),
-('10d5e101-ec0c-41f2-b341-c7708853546e','754674f2-a803-4694-9bcd-4548f767e63f');
+INSERT INTO role_preferer (id_cinephile, id_role) VALUES
+('10f251b7-c76a-4ea0-aace-09ff0574d1da', '07bbea8d-0efd-424e-a6de-2189f40fb746'), -- Jean Bon - Mario
+('2bf1263d-9015-4896-94c5-9cf5be3821d9', '465e2f1a-7473-480c-8542-188d6e0f7239'), -- Jacky Chan - Sonic
+('2a689e64-7292-4a28-bdac-836f731bd064', '28a9e047-0b66-4a85-8362-b95d8a668113'), -- Alain Delon - Steve
+('2a689e64-7292-4a28-bdac-836f731bd064', '52c8fb4f-915f-4b62-bf33-6ad0df700f7d'); -- Alain Delon - Shrek
 
 insert into jouer (id_acteur, id_role) values
 ('3539e136-00de-43f7-9858-20160e76ecbb','9e525fe1-44c5-40a1-ad3a-cf0299dad6a9'),
