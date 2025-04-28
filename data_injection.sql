@@ -6,9 +6,12 @@ INSERT INTO realisateur (id_realisateur, nom_realisateur, prenom_realisateur) VA
 ('21552e22-134d-4b17-bb7a-18b8a424f954', 'Jenson', 'Vicky');    -- Shrek
 
 INSERT into film (titre, date_de_sortie, duree, id_realisateur) VALUES
-('Minecraft film', '2025-04-02', '01:41', 'af6adc2f-f1d6-4e47-bd54-970ddddc7b09'),
-('Nemo', '2003-11-26', '01:40','cf543c7d-fb66-4a58-9037-d477bd1840b7'),
-('Sonic', '2020-02-09', '01:39','af6adc2f-f1d6-4e47-bd54-970ddddc7b09');
+('Minecraft, le film', '2025-04-02', '01:41', '48173b50-0f9e-4eef-9d3e-682b015cb5ce'),          -- Jared Hess
+('Le Monde de Nemo', '2003-11-26', '01:40','638d1c05-5581-4c29-b635-26ebb7f2dd72'),             -- Andrew Stanton
+('Wall-E', '2008-07-30', '01:37', '638d1c05-5581-4c29-b635-26ebb7f2dd72'),                      -- Andrew Stanton
+('Sonic, le film', '2020-02-09', '01:39','c1f23395-6f46-4af4-89ba-b16132e26656'),               -- Jeff Fowler
+('Super Mario Bros., le film', '2023-04-05', '01:32', 'ecf6c7e5-1a9c-4341-b756-4a9654de192b'),  -- Michael Jelernic
+('Shrek', '2001-07-04', '01:29', '21552e22-134d-4b17-bb7a-18b8a424f954');                       -- Vicky Jenson
 
 INSERT INTO role_film (nom_role, id_film) VALUES
 ('STEVE', '36887af2-e44c-4edb-a81d-775015025ef5'),
