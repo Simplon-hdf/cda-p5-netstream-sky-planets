@@ -5,13 +5,13 @@ INSERT INTO realisateur (id_realisateur, nom_realisateur, prenom_realisateur) VA
 ('ecf6c7e5-1a9c-4341-b756-4a9654de192b', 'Jelenic', 'Michael'), -- Mario
 ('21552e22-134d-4b17-bb7a-18b8a424f954', 'Jenson', 'Vicky');    -- Shrek
 
-INSERT into film (titre, date_de_sortie, duree, id_realisateur) VALUES
-('Minecraft, le film', '2025-04-02', '01:41', '48173b50-0f9e-4eef-9d3e-682b015cb5ce'),          -- Jared Hess
-('Le Monde de Nemo', '2003-11-26', '01:40','638d1c05-5581-4c29-b635-26ebb7f2dd72'),             -- Andrew Stanton
-('Wall-E', '2008-07-30', '01:37', '638d1c05-5581-4c29-b635-26ebb7f2dd72'),                      -- Andrew Stanton
-('Sonic, le film', '2020-02-09', '01:39','c1f23395-6f46-4af4-89ba-b16132e26656'),               -- Jeff Fowler
-('Super Mario Bros., le film', '2023-04-05', '01:32', 'ecf6c7e5-1a9c-4341-b756-4a9654de192b'),  -- Michael Jelernic
-('Shrek', '2001-07-04', '01:29', '21552e22-134d-4b17-bb7a-18b8a424f954');                       -- Vicky Jenson
+INSERT into film (id_film, titre, date_de_sortie, duree, id_realisateur) VALUES
+('cd219724-f963-436f-abec-e2bd31c2f9b7', 'Minecraft, le film', '2025-04-02', '01:41', '48173b50-0f9e-4eef-9d3e-682b015cb5ce'),          -- Jared Hess
+('5dbfcfbd-395f-4986-ab7d-d231f97f2f56', 'Le Monde de Nemo', '2003-11-26', '01:40', '638d1c05-5581-4c29-b635-26ebb7f2dd72'),            -- Andrew Stanton
+('34b9718c-f98d-417f-8064-b3f277d0bfc3', 'Wall-E', '2008-07-30', '01:37', '638d1c05-5581-4c29-b635-26ebb7f2dd72'),                      -- Andrew Stanton
+('b224f19a-acf1-46c3-b70b-ee848fc2d2c8', 'Sonic, le film', '2020-02-09', '01:39', 'c1f23395-6f46-4af4-89ba-b16132e26656'),              -- Jeff Fowler
+('0ded922f-0e81-460d-be1f-a6e36303f508', 'Super Mario Bros., le film', '2023-04-05', '01:32', 'ecf6c7e5-1a9c-4341-b756-4a9654de192b'),  -- Michael Jelernic
+('9a6b530b-a60e-4905-a858-82ec2c3bd85b', 'Shrek', '2001-07-04', '01:29', '21552e22-134d-4b17-bb7a-18b8a424f954');                       -- Vicky Jenson
 
 INSERT INTO role_film (nom_role, id_film) VALUES
 ('STEVE', '36887af2-e44c-4edb-a81d-775015025ef5'),
