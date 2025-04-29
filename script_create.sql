@@ -3,7 +3,7 @@ CREATE DATABASE netstream;
 CREATE TABLE realisateur (
     id_realisateur UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     nom_realisateur VARCHAR(50) NOT NULL,
-    prenom_realisateur VARCHAR(50) NOT NULL
+    prenom_realisateur VARCHAR(50) NOT NULL,
     date_modification_realisateur TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_creation_realisateur TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
