@@ -48,6 +48,7 @@ WHERE age_acteur > 30
 ORDER BY nom_acteur;
 
 -- Select les acteurs principaux d'un film donné
+-- r
 SELECT 
     a.nom_acteur,
     a.prenom_acteur,
@@ -235,62 +236,6 @@ call create_acteur_role('567e31c2-a4bd-4b4a-a096-ec32e643936c', 'Chuck', 'Norris
 
 
 -- trigger pour la table archive qui vient ce mettre a jour lorsque l'on modifie une table
-
-
--- mise en place d'une politique de retention des données
--- Création d'une politique de sauvegarde automatique des données
-
--- Création d'une fonction pour sauvegarder les données importantes
-    CREATE OR REPLACE FUNCTION sauvegarder_donnees()
-    RETURNS void
-    LANGUAGE plpgsql
-    AS $$
-    BEGIN
-        -- Sauvegarde des tables principales
-        EXECUTE 'COPY (SELECT * FROM film) TO ''/tmp/film_backup.csv'' WITH CSV HEADER';
-        EXECUTE 'COPY (SELECT * FROM acteur) TO ''/tmp/acteur_backup.csv'' WITH CSV HEADER';
-        EXECUTE 'COPY (SELECT * FROM cinephile) TO ''/tmp/cinephile_backup.csv'' WITH CSV HEADER';
-        EXECUTE 'COPY (SELECT * FROM realisateur) TO ''/tmp/realisateur_backup.csv'' WITH CSV HEADER';
-        EXECUTE 'COPY (SELECT * FROM archive) TO ''/tmp/archive_utilisateur_backup.csv'' WITH CSV HEADER';
-    END;
-    $$;
-
--- Création d'un job planifié pour exécuter la sauvegarde quotidienne
-CREATE OR REPLACE FUNCTION planifier_sauvegarde()
-RETURNS void
-LANGUAGE plpgsql
-AS $$
-BEGIN
-    IF NOT EXISTS (
-        SELECT 1 FROM pg_catalog.pg_proc 
-        WHERE proname = 'sauvegarder_donnees'
-    ) THEN
-        PERFORM cron.schedule(
-            'sauvegarde_quotidienne',
-            '53 20 * * *', -- pour 20H50
-            'SELECT sauvegarder_donnees()'
-        );
-    END IF;
-END;
-$$;
-
--- Exécution de la planification
-SELECT planifier_sauvegarde();
-
--- Création d'une fonction pour restaurer les données
-CREATE OR REPLACE FUNCTION restaurer_donnees()
-RETURNS void
-LANGUAGE plpgsql
-AS $$
-BEGIN
-    -- Restauration des tables principales
-    COPY film FROM '/backup/film_backup.csv' WITH CSV HEADER;
-    COPY acteur FROM '/backup/acteur_backup.csv' WITH CSV HEADER;
-    COPY cinephile FROM '/backup/cinephile_backup.csv' WITH CSV HEADER;
-    COPY realisateur FROM '/backup/realisateur_backup.csv' WITH CSV HEADER;
-    COPY archive_utilisateur FROM '/backup/archive_utilisateur_backup.csv' WITH CSV HEADER;
-END;
-$$;
 ```
 
 ## 📚 Documentation
