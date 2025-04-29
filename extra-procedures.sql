@@ -1,83 +1,86 @@
--- update un film
-create or replace procedure update_film(
-    in p_id_film uuid,
-    in p_titre varchar(250),
-    in p_annee_de_sortie smallint,
-    in p_duree time,
-    in p_id_realisateur uuid
+-- Update un film
+CREATE OR REPLACE PROCEDURE update_film(
+    IN p_id_film UUID,
+    IN p_titre VARCHAR(250),
+    IN p_annee_de_sortie SMALLINT,
+    IN p_duree TIME,
+    IN p_id_realisateur UUID
 )
-language plpgsql
-as $$
-begin 
-update film 
-set titre = coalesce(p_titre , titre),
-    annee_de_sortie = coalesce(p_annee_de_sortie , annee_de_sortie),
-    duree = coalesce(p_duree, duree),
-    id_realisateur = coalesce(p_id_realisateur, id_realisateur)
-    where id_film = p_id_film;
-end;
+LANGUAGE plpgsql
+AS $$
+BEGIN 
+    UPDATE film 
+    SET titre = COALESCE(p_titre, titre),
+        annee_de_sortie = COALESCE(p_annee_de_sortie, annee_de_sortie),
+        duree = COALESCE(p_duree, duree),
+        id_realisateur = COALESCE(p_id_realisateur, id_realisateur)
+    WHERE id_film = p_id_film;
+END;
 $$;
 
--- appeler la procedure
-call update_film('43748c8d-df99-426d-9903-792d1cfa84fb', 'Mario Bros', NULL, NULL, NULL);
+-- Appeler la procédure
+CALL update_film('43748c8d-df99-426d-9903-792d1cfa84fb', 'Mario Bros', NULL, NULL, NULL);
 
--- delete un realisateur et les films associés
-create or replace procedure delete_realisateur(
-    in p_id_realisateur UUID
+-- Delete un réalisateur et les films associés
+CREATE OR REPLACE PROCEDURE delete_realisateur(
+    IN p_id_realisateur UUID
 )
-language plpgsql
-as $$
-begin
-delete from film where id_realisateur = p_id_realisateur;
-delete from realisateur where id_realisateur = p_id_realisateur;
-end;
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM film WHERE id_realisateur = p_id_realisateur;
+    DELETE FROM realisateur WHERE id_realisateur = p_id_realisateur;
+END;
 $$;
 
--- appeler la procedure
-call delete_realisateur('43748c8d-df99-426d-9903-792d1cfa84fb');
+-- Appeler la procédure
+CALL delete_realisateur('43748c8d-df99-426d-9903-792d1cfa84fb');
 
--- delete un film et les roles associés 
-create or replace procedure delete_film(
-    in p_id_film UUID
+-- Delete un film et les rôles associés 
+CREATE OR REPLACE PROCEDURE delete_film(
+    IN p_id_film UUID
 )
-language plpgsql
-as $$
-begin
-delete from role_film where id_film = p_id_film;
-delete from film where id_film = p_id_film;
-end;
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM role_film WHERE id_film = p_id_film;
+    DELETE FROM film WHERE id_film = p_id_film;
+END;
 $$;
 
--- appeler la procedure
-call delete_film('43748c8d-df99-426d-9903-792d1cfa84fb');
+-- Appeler la procédure
+CALL delete_film('43748c8d-df99-426d-9903-792d1cfa84fb');
 
--- creer un realisateur
-create or replace procedure create_realisateur(
-    in p_nom_realisateur varchar(50),
-    in p_prenom_realisateur varchar(50)
+-- Créer un réalisateur
+CREATE OR REPLACE PROCEDURE create_realisateur(
+    IN p_nom_realisateur VARCHAR(50),
+    IN p_prenom_realisateur VARCHAR(50)
 )
-language plpgsql
-as $$
-begin 
-insert into realisateur (nom_realisateur, prenom_realisateur) values
-(p_nom_realisateur, p_prenom_realisateur);
-end;
+LANGUAGE plpgsql
+AS $$
+BEGIN 
+    INSERT INTO realisateur (nom_realisateur, prenom_realisateur) 
+    VALUES (p_nom_realisateur, p_prenom_realisateur);
+END;
 $$;
 
--- appeler la procedure
-call create_realisateur('John', 'Doe');
+-- Appeler la procédure
+CALL create_realisateur('John', 'Doe');
 
--- creer un film 
-create or replace procedure create_film(
-    in p_titre varchar(250),
-    in p_date_sortie_film date,
-    in p_duree time,
-    in p_id_realisateur uuid
+-- Créer un film 
+CREATE OR REPLACE PROCEDURE create_film(
+    IN p_titre VARCHAR(250),
+    IN p_date_sortie_film DATE,
+    IN p_duree TIME,
+    IN p_id_realisateur UUID
 )
-language plpgsql 
-as $$ 
-begin 
-insert into film (titre,date_sortie_film,duree,id_realisateur) values
-(p_titre, p_date_sortie_film,p_duree, p_id_realisateur);
-end;
+LANGUAGE plpgsql 
+AS $$ 
+BEGIN 
+    INSERT INTO film (titre, date_sortie_film, duree, id_realisateur) 
+    VALUES (p_titre, p_date_sortie_film, p_duree, p_id_realisateur);
+END;
 $$;
+
+-- Appeler la procédure
+CALL create_film('Mario Bros', '2024-04-01', '01:30:00', '43748c8d-df99-426d-9903-792d1cfa84fb');
