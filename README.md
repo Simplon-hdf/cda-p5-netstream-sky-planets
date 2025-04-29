@@ -131,6 +131,7 @@ $$;
 -- appeler la procedure
 call create_actor('John', 'Doe', '1990-01-01');
 
+
 -- delete un acteur et les roles associés
 create or replace procedure delete_acteur(
     in p_id_acteur UUID
@@ -147,25 +148,30 @@ $$;
 call delete_acteur('43748c8d-df99-426d-9903-792d1cfa84fb');
 
 -- update un acteur
-create or replace procedure update_acteur(
-    in p_id_acteur UUID,
-    in p_nom_acteur varchar(50),
-    in p_prenom_acteur varchar(50),
-    in p_date_de_naissance DATE
+CREATE OR REPLACE PROCEDURE update_acteur(
+    IN p_id_acteur UUID,
+    IN p_nom_acteur VARCHAR(50),
+    IN p_prenom_acteur VARCHAR(50),
+    IN p_date_de_naissance DATE,
+    IN p_id_role UUID
 )
-language plpgsql
-as $$ 
-begin 
-update acteur 
-SET nom_acteur = coalesce(p_nom_acteur, nom_acteur),
-    prenom_acteur = coalesce(p__prenom_acteur, prenom_acteur),
-    date_de_naissance = coalesce(p_date_de_naissance, date_de_naissance)
-    where id_acteur = p_id_acteur; 
-end;
+LANGUAGE plpgsql
+AS $$ 
+BEGIN
+UPDATE acteur 
+SET nom_acteur = COALESCE(p_nom_acteur, nom_acteur),
+    prenom_acteur = COALESCE(p_prenom_acteur, prenom_acteur),
+    date_de_naissance = COALESCE(p_date_de_naissance, date_de_naissance)
+    WHERE id_acteur = p_id_acteur; 
+
+UPDATE jouer
+SET id_acteur = COALESCE(p_id_acteur, id_acteur)
+    WHERE id_role = p_id_role; 
+END;
 $$;
 
--- appeler la procedure
-call update_acteur('43748c8d-df99-426d-9903-792d1cfa84fb', 'John', 'Doe', NULL);
+-- Appeler la procedure
+call update_acteur('793420c4-71f4-43e5-a76b-ea47fd346d0a', NULL, NULL, NULL, 'e5a75a4f-713d-4392-b1d3-d130fc48d446');
 
 
 -- recherche un acteur
