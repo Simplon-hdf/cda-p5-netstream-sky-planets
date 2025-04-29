@@ -33,7 +33,7 @@ CREATE TABLE acteur (
     nom_acteur VARCHAR(50) NOT NULL,
     prenom_acteur VARCHAR(50) NOT NULL,
     date_de_naissance DATE NOT NULL,
-    date_modification_acteur TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    date_modification_acteur TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_creation_acteur TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 
 );
@@ -84,3 +84,4 @@ CREATE TABLE archive (
     date_modification_archive TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_creation_archive TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
