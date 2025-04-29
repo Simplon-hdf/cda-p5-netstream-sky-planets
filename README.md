@@ -34,16 +34,16 @@ cd cda-p5-netstream-sky-planets
 ```
 ```sql
 -- Récupérer les films avec leur date, dans l'ordre de sortie
-SELECT titre_film, date_sortie_film
+SELECT titre, date_de_sortie
 FROM film
-ORDER BY date_sortie_film DESC;
+ORDER BY date_de_sortie DESC;
 
 -- Récupérer les acteurs de plus de 30 ans
 SELECT nom_acteur, prenom_acteur, age_acteur
 FROM (
   SELECT nom_acteur, prenom_acteur, TRUNC((CURRENT_DATE - date_de_naissance)/365.25) AS age_acteur
   FROM acteur
-) AS subquery
+)
 WHERE age_acteur > 30 
 ORDER BY nom_acteur;
 
@@ -76,8 +76,8 @@ FROM
     INNER JOIN role_film rf ON j.id_role = rf.id_role
     INNER JOIN film f ON rf.id_film = f.id_film
 WHERE 
-    LOWER(a.nom_acteur) LIKE '%jack%' 
-    AND LOWER(a.prenom_acteur) LIKE '%black%'
+    a.nom_acteur ILIKE '%jack%' 
+    AND a.prenom_acteur ILIKE '%black%'
 ORDER BY 
     f.titre;
 
@@ -98,7 +98,7 @@ WHERE titre = 'Mario Film';
 SELECT * 
 FROM acteur 
 LIMIT 3 OFFSET (
-    SELECT COUNT(*) - 3 FROM acteur
+    SELECT COUNT(0) - 3 FROM acteur
 );
 
 -- Supprimer un acteur
