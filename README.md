@@ -244,7 +244,67 @@ $$;
 call create_acteur_role('567e31c2-a4bd-4b4a-a096-ec32e643936c', 'Chuck', 'Norris', '1985-05-10', 'Dieu', 'e5a75a4f-713d-4392-b1d3-d130fc48d446', 'cd219724-f963-436f-abec-e2bd31c2f9b7');
 
 
--- trigger pour la table archive qui vient ce mettre a jour lorsque l'on modifie une table
+-- Trigger pour la table archive qui vient ce mettre a jour lorsque l'on modifie une table
+CREATE OR REPLACE FUNCTION trigger_archive()
+RETURNS trigger 
+AS $$ 
+BEGIN
+    -- Prénom
+    IF NEW.prenom_cinephile IS DISTINCT FROM OLD.prenom_cinephile THEN 
+        INSERT INTO archive (id_archive,id_cinephile,champ_modifie, ancienne_valeur, nouvelle_valeur, date_modification) VALUES(
+            gen_random_uuid(),
+            OLD.id_cinephile,
+            'prenom_cinephile',
+            OLD.prenom_cinephile,
+            NEW.prenom_cinephile,
+            NOW()
+        );
+    END IF;
+
+    -- Nom
+    IF NEW.nom_cinephile IS DISTINCT FROM OLD.nom_cinephile THEN 
+        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_modification) VALUES(
+            gen_random_uuid(),
+            OLD.id_cinephile,
+            'nom_cinephile',
+            OLD.nom_cinephile,
+            NEW.nom_cinephile,
+            NOW()
+        );
+    END IF;
+
+    -- E-mail
+    IF NEW.email IS DISTINCT FROM OLD.email THEN 
+        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_modification) VALUES(
+            gen_random_uuid(),
+            OLD.id_cinephile,
+            'email',
+            OLD.email,
+            NEW.email,
+            NOW()
+        );
+    END IF;
+    
+    -- Mot de passe 
+    IF NEW.mot_de_passe IS DISTINCT FROM OLD.mot_de_passe THEN 
+        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_modification) VALUES(
+            gen_random_uuid(),
+            OLD.id_cinephile,
+            'mot_de_passe',
+            OLD.mot_de_passe,
+            NEW.mot_de_passe,
+            NOW()
+        );
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql; 
+
+CREATE TRIGGER trigger_save_archive
+AFTER UPDATE ON cinephile
+FOR EACH ROW
+EXECUTE FUNCTION trigger_archive();
 ```
 
 ## 📚 Documentation
