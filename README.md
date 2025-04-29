@@ -41,13 +41,13 @@ ORDER BY date_sortie_film DESC;
 -- Récupérer les acteurs de plus de 30 ans
 SELECT nom_acteur, prenom_acteur, age_acteur
 FROM (
-  SELECT nom_acteur, prenom_acteur, TRUNC((CURRENT_DATE - date_de_naissance)/365.25) "age_acteur"
+  SELECT nom_acteur, prenom_acteur, TRUNC((CURRENT_DATE - date_de_naissance)/365.25) AS age_acteur
   FROM acteur
-)
+) AS subquery
 WHERE age_acteur > 30 
 ORDER BY nom_acteur;
 
--- Lister les acteurs/actrices principaux pour un film donné
+-- Lister les acteurs/actrices principaux d’un film donné
 SELECT 
     a.nom_acteur,
     a.prenom_acteur,
@@ -59,7 +59,7 @@ FROM
     INNER JOIN role_film rf ON j.id_role = rf.id_role
     INNER JOIN film f ON rf.id_film = f.id_film
 WHERE 
-    f.titre like '%Minecraft%'
+    f.titre ILIKE '%Minecraft%'
 ORDER BY 
     a.nom_acteur, 
     a.prenom_acteur;
@@ -76,80 +76,84 @@ FROM
     INNER JOIN role_film rf ON j.id_role = rf.id_role
     INNER JOIN film f ON rf.id_film = f.id_film
 WHERE 
-    lower(a.nom_acteur) like '%jack%' AND lower(a.prenom_acteur) like '%black%'
+    LOWER(a.nom_acteur) LIKE '%jack%' 
+    AND LOWER(a.prenom_acteur) LIKE '%black%'
 ORDER BY 
     f.titre;
 
 -- Ajouter un film
-insert into film (titre, annee_de_sortie, duree, id_realisateur) values ('mario film', 2023, '01:32', '43748c8d-df99-426d-9903-792d1cfa84fb'); 
+INSERT INTO film (titre, annee_de_sortie, duree, id_realisateur)
+VALUES ('Mario Film', 2023, '01:32', '43748c8d-df99-426d-9903-792d1cfa84fb'); 
 
 -- Ajouter un acteur
-insert into acteur (nom_acteur, prenom_acteur, date_de_naissance) values ('Chris', 'pratt', '1979-06-21');
+INSERT INTO acteur (nom_acteur, prenom_acteur, date_de_naissance)
+VALUES ('Chris', 'Pratt', '1979-06-21');
 
 -- Modifier le titre du film
-UPDATE film SET titre = 'Super Mario Bros, le film' WHERE titre = 'mario film';
+UPDATE film
+SET titre = 'Super Mario Bros, le film'
+WHERE titre = 'Mario Film';
 
 -- Afficher les 3 derniers acteurs ajoutés
-select * from acteur limit 3 offset (SELECT (count(0)-3) FROM acteur);
+SELECT * 
+FROM acteur 
+LIMIT 3 OFFSET (
+    SELECT COUNT(*) - 3 FROM acteur
+);
 
 -- Supprimer un acteur
-delete from acteur where nom_acteur = 'black';
-
+DELETE FROM acteur
+WHERE nom_acteur = 'Black';
 
 -- PROCÉDURES STOCKÉES / FONCTIONS
--- Afficher la liste des films d'un realisateur en parametre
+
+-- Afficher la liste des films d’un réalisateur en paramètre
 CREATE OR REPLACE FUNCTION film_realisateur(nom VARCHAR(50), prenom VARCHAR(50))
 RETURNS TABLE(titre VARCHAR(250), nom_realisateur VARCHAR(50), prenom_realisateur VARCHAR(50))
 AS $$
 BEGIN
-RETURN QUERY
-SELECT film.titre, r.nom_realisateur,r.prenom_realisateur
-FROM film
-JOIN realisateur r
-ON r.id_realisateur = film.id_realisateur
-WHERE r.nom_realisateur = nom            
-AND r.prenom_realisateur = prenom;
+    RETURN QUERY
+    SELECT film.titre, r.nom_realisateur, r.prenom_realisateur
+    FROM film
+    JOIN realisateur r ON r.id_realisateur = film.id_realisateur
+    WHERE r.nom_realisateur = nom AND r.prenom_realisateur = prenom;
 END;
 $$ LANGUAGE plpgsql;
 
--- Appeler la procedure
-select * from film_realisateur('Jelenic', 'Michael');
+-- Appeler la fonction
+SELECT * FROM film_realisateur('Jelenic', 'Michael');
 
-
--- CRUD pour les acteurs et leurs rôles
--- Ajout d'un acteur
-create or replace procedure create_actor(
-    in p_nom_acteur varchar(50),
-    in p_prenom_acteur varchar(50),
-    in p_date_de_naissance DATE
+-- Ajout d’un acteur
+CREATE OR REPLACE PROCEDURE create_actor(
+    IN p_nom_acteur VARCHAR(50),
+    IN p_prenom_acteur VARCHAR(50),
+    IN p_date_de_naissance DATE
 )
-language plpgsql
-as $$ 
-begin
-insert into acteur (nom_acteur, prenom_acteur, date_de_naissance) values
-(p_nom_acteur, p_prenom_acteur,p_date_de_naissance);
-end; 
+LANGUAGE plpgsql
+AS $$ 
+BEGIN
+    INSERT INTO acteur (nom_acteur, prenom_acteur, date_de_naissance)
+    VALUES (p_nom_acteur, p_prenom_acteur, p_date_de_naissance);
+END; 
 $$;
 
--- Appeler la procedure
-call create_actor('John', 'Doe', '1990-01-01');
+-- Appeler la procédure
+CALL create_actor('John', 'Doe', '1990-01-01');
 
-
--- Supprimer un acteur et les roles associés
-create or replace procedure delete_acteur(
-    in p_id_acteur UUID
+-- Supprimer un acteur et les rôles associés
+CREATE OR REPLACE PROCEDURE delete_acteur(
+    IN p_id_acteur UUID
 )
-language plpgsql
-as $$
-begin 
-delete from jouer where id_acteur = p_id_acteur;
-delete from acteur where id_acteur = p_id_acteur;
-end;
+LANGUAGE plpgsql
+AS $$
+BEGIN 
+    DELETE FROM jouer WHERE id_acteur = p_id_acteur;
+    DELETE FROM acteur WHERE id_acteur = p_id_acteur;
+END;
 $$;
 
--- Appeler la procedure
-call delete_acteur('43748c8d-df99-426d-9903-792d1cfa84fb');
-
+-- Appeler la procédure
+CALL delete_acteur('43748c8d-df99-426d-9903-792d1cfa84fb');
 
 -- Modifier un acteur
 CREATE OR REPLACE PROCEDURE update_acteur(
@@ -162,21 +166,24 @@ CREATE OR REPLACE PROCEDURE update_acteur(
 LANGUAGE plpgsql
 AS $$ 
 BEGIN
-UPDATE acteur 
-SET nom_acteur = COALESCE(p_nom_acteur, nom_acteur),
-    prenom_acteur = COALESCE(p_prenom_acteur, prenom_acteur),
-    date_de_naissance = COALESCE(p_date_de_naissance, date_de_naissance)
+    UPDATE acteur 
+    SET nom_acteur = COALESCE(p_nom_acteur, nom_acteur),
+        prenom_acteur = COALESCE(p_prenom_acteur, prenom_acteur),
+        date_de_naissance = COALESCE(p_date_de_naissance, date_de_naissance)
     WHERE id_acteur = p_id_acteur; 
 
-UPDATE jouer
-SET id_acteur = COALESCE(p_id_acteur, id_acteur)
+    UPDATE jouer
+    SET id_acteur = COALESCE(p_id_acteur, id_acteur)
     WHERE id_role = p_id_role; 
 END;
 $$;
 
--- Appeler la procedure
-call update_acteur('793420c4-71f4-43e5-a76b-ea47fd346d0a', NULL, NULL, NULL, 'e5a75a4f-713d-4392-b1d3-d130fc48d446');
-
+-- Appeler la procédure
+CALL update_acteur(
+    '793420c4-71f4-43e5-a76b-ea47fd346d0a', 
+    NULL, NULL, NULL, 
+    'e5a75a4f-713d-4392-b1d3-d130fc48d446'
+);
 
 -- Rechercher un acteur
 CREATE OR REPLACE FUNCTION recherche_acteur(
@@ -192,56 +199,60 @@ RETURNS TABLE (
 LANGUAGE plpgsql 
 AS $$ 
 BEGIN 
-     RETURN QUERY 
-     SELECT a.id_acteur, a.nom_acteur, a.prenom_acteur, a.date_de_naissance
-     FROM acteur a
-     WHERE (p_nom_acteur IS NULL OR a.nom_acteur = p_nom_acteur)
-       AND (p_prenom_acteur IS NULL OR a.prenom_acteur = p_prenom_acteur);
+    RETURN QUERY 
+    SELECT a.id_acteur, a.nom_acteur, a.prenom_acteur, a.date_de_naissance
+    FROM acteur a
+    WHERE (p_nom_acteur IS NULL OR a.nom_acteur = p_nom_acteur)
+        AND (p_prenom_acteur IS NULL OR a.prenom_acteur = p_prenom_acteur);
 END;
 $$;
 
 -- Appeler la fonction
-select * from recherche_acteur('black', 'jack');
-
+SELECT * FROM recherche_acteur('Black', 'Jack');
 
 -- Créer un acteur et un rôle pour un film
-create or replace procedure create_acteur_role(
-    in p_id_acteur uuid,
-    in p_prenom_acteur varchar(50),
-    in p_nom_acteur varchar(50), 
-    in p_date_de_naissance date,
-    in p_nom_role varchar(150),
-    in p_id_role uuid,
-    in p_id_film uuid
+CREATE OR REPLACE PROCEDURE create_acteur_role(
+    IN p_id_acteur UUID,
+    IN p_prenom_acteur VARCHAR(50),
+    IN p_nom_acteur VARCHAR(50), 
+    IN p_date_de_naissance DATE,
+    IN p_nom_role VARCHAR(150),
+    IN p_id_role UUID,
+    IN p_id_film UUID
 ) 
-language plpgsql 
-as $$
-declare
-    v_exists boolean;
-begin
+LANGUAGE plpgsql 
+AS $$
+DECLARE
+    v_exists BOOLEAN;
+BEGIN
     SELECT EXISTS(SELECT 1 FROM acteur WHERE id_acteur = p_id_acteur) INTO v_exists;
 
     IF NOT v_exists THEN
-        INSERT INTO acteur (id_acteur, prenom_acteur, nom_acteur, date_de_naissance) VALUES
-            (p_id_acteur, p_prenom_acteur, p_nom_acteur, p_date_de_naissance);
+        INSERT INTO acteur (id_acteur, prenom_acteur, nom_acteur, date_de_naissance)
+        VALUES (p_id_acteur, p_prenom_acteur, p_nom_acteur, p_date_de_naissance);
     END IF;
-
 
     SELECT EXISTS(SELECT 1 FROM role_film WHERE id_role = p_id_role) INTO v_exists;
 
     IF NOT v_exists THEN
-        INSERT INTO role_film (id_role, nom_role, id_film) VALUES
-            (p_id_role, p_nom_role, p_id_film);
+        INSERT INTO role_film (id_role, nom_role, id_film)
+        VALUES (p_id_role, p_nom_role, p_id_film);
     END IF;
 
-
-    INSERT INTO jouer (id_acteur, id_role) VALUES
-        (p_id_acteur, p_id_role);
-end;
+    INSERT INTO jouer (id_acteur, id_role)
+    VALUES (p_id_acteur, p_id_role);
+END;
 $$;
 
--- Appeler la fonction create_acteur_role (Exemple: Chuck Norris joue Dieu dans Minecraft)
-call create_acteur_role('567e31c2-a4bd-4b4a-a096-ec32e643936c', 'Chuck', 'Norris', '1985-05-10', 'Dieu', 'e5a75a4f-713d-4392-b1d3-d130fc48d446', 'cd219724-f963-436f-abec-e2bd31c2f9b7');
+-- Exemple : Chuck Norris joue Dieu dans Minecraft
+CALL create_acteur_role(
+    '567e31c2-a4bd-4b4a-a096-ec32e643936c',
+    'Chuck', 'Norris',
+    '1985-05-10',
+    'Dieu',
+    'e5a75a4f-713d-4392-b1d3-d130fc48d446',
+    'cd219724-f963-436f-abec-e2bd31c2f9b7'
+);
 
 
 -- Trigger pour la table archive qui vient ce mettre a jour lorsque l'on modifie une table
