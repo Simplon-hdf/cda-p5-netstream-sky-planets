@@ -33,12 +33,12 @@ https://github.com/Simplon-hdf/cda-p5-netstream-sky-planets
 cd cda-p5-netstream-sky-planets
 ```
 ```sql
--- Select film et date par ordre du plus recent au plus ancien
+-- Récupérer les films avec leur date, dans l'ordre de sortie
 SELECT titre_film, date_sortie_film
 FROM film
 ORDER BY date_sortie_film DESC;
 
--- requete age en dessous de 30
+-- Récupérer les acteurs de plus de 30 ans
 SELECT nom_acteur, prenom_acteur, age_acteur
 FROM (
   SELECT nom_acteur, prenom_acteur, TRUNC((CURRENT_DATE - date_de_naissance)/365.25) "age_acteur"
@@ -47,8 +47,7 @@ FROM (
 WHERE age_acteur > 30 
 ORDER BY nom_acteur;
 
--- Select les acteurs principaux d'un film donné
--- r
+-- Lister les acteurs/actrices principaux pour un film donné
 SELECT 
     a.nom_acteur,
     a.prenom_acteur,
@@ -65,7 +64,7 @@ ORDER BY
     a.nom_acteur, 
     a.prenom_acteur;
 
--- Select le film par rapport au acteur
+-- Lister les films pour un acteur/actrice donné
 SELECT  
     a.nom_acteur,
     a.prenom_acteur,
@@ -93,10 +92,12 @@ UPDATE film SET titre = 'Super Mario Bros, le film' WHERE titre = 'mario film';
 -- Afficher les 3 derniers acteurs ajoutés
 select * from acteur limit 3 offset (SELECT (count(0)-3) FROM acteur);
 
--- Suprimer un acteur
+-- Supprimer un acteur
 delete from acteur where nom_acteur = 'black';
 
--- creer une procedure stockée permettant d'afficher la liste des films d'un realisateur en parametre
+
+-- PROCÉDURES STOCKÉES / FONCTIONS
+-- Afficher la liste des films d'un realisateur en parametre
 CREATE OR REPLACE FUNCTION film_realisateur(nom VARCHAR(50), prenom VARCHAR(50))
 RETURNS TABLE(titre VARCHAR(250), nom_realisateur VARCHAR(50), prenom_realisateur VARCHAR(50))
 AS $$
@@ -111,10 +112,12 @@ AND r.prenom_realisateur = prenom;
 END;
 $$ LANGUAGE plpgsql;
 
--- appeler la procedure
+-- Appeler la procedure
 select * from film_realisateur('Jelenic', 'Michael');
 
--- gerer le CRUD pour l'ajout d'un nouvelles acteur au sein d'un film via une procedure stockée
+
+-- CRUD pour les acteurs et leurs rôles
+-- Ajout d'un acteur
 create or replace procedure create_actor(
     in p_nom_acteur varchar(50),
     in p_prenom_acteur varchar(50),
@@ -128,11 +131,11 @@ insert into acteur (nom_acteur, prenom_acteur, date_de_naissance) values
 end; 
 $$;
 
--- appeler la procedure
+-- Appeler la procedure
 call create_actor('John', 'Doe', '1990-01-01');
 
 
--- delete un acteur et les roles associés
+-- Supprimer un acteur et les roles associés
 create or replace procedure delete_acteur(
     in p_id_acteur UUID
 )
@@ -144,10 +147,11 @@ delete from acteur where id_acteur = p_id_acteur;
 end;
 $$;
 
--- appeler la procedure
+-- Appeler la procedure
 call delete_acteur('43748c8d-df99-426d-9903-792d1cfa84fb');
 
--- update un acteur
+
+-- Modifier un acteur
 CREATE OR REPLACE PROCEDURE update_acteur(
     IN p_id_acteur UUID,
     IN p_nom_acteur VARCHAR(50),
@@ -174,8 +178,7 @@ $$;
 call update_acteur('793420c4-71f4-43e5-a76b-ea47fd346d0a', NULL, NULL, NULL, 'e5a75a4f-713d-4392-b1d3-d130fc48d446');
 
 
--- recherche un acteur
-     
+-- Rechercher un acteur
 CREATE OR REPLACE FUNCTION recherche_acteur(
     IN p_nom_acteur VARCHAR(50),
     IN p_prenom_acteur VARCHAR(50)
@@ -197,7 +200,7 @@ BEGIN
 END;
 $$;
 
--- appeler la fonction
+-- Appeler la fonction
 select * from recherche_acteur('black', 'jack');
 
 
