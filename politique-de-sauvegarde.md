@@ -7,6 +7,10 @@ Ainsi, en cas de problème majeur et manque de bonne pratique de sauvegarde manu
 
 
 ## 🔁 Fréquence
+Avec l'aide d'une tâche planifiée CRON, une sauvegarde sera effectuée tous les jours à 01:00.
+
+Bien qu'il soit meilleure pratique de faire des sauvegardes partielles journalières et sauvegardes complètes de manière hebdomadaires, nous avons décidé de rester sur des sauvegardes complètes uniquement. La raison étant, dans le cas d'un développement rapide de l'application Netstream avec une expansion de la base de données à l'avenir, il peut être intéressant d'avoir un backup complet journalier. Aussi, le coût reste relativement faible, puisque les données de test sont assez peu nombreuses.
+
 
 ## Futures améliorations
 3.2.1
