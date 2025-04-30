@@ -363,8 +363,9 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public
 -- local   all             netstream_user                          scram-sha-256
 -- local   all             netstream_admin                         scram-sha-256
 
--- Exemple d'utilisation :
 -- sudo systemctl restart postgresql.service
+
+-- Exemple d'utilisation :
 
 -- Pour se connecter en tant qu'administrateur :
 -- psql -U netstream_admin -d netstream
