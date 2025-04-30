@@ -316,6 +316,62 @@ CREATE TRIGGER trigger_save_archive
 AFTER UPDATE ON cinephile
 FOR EACH ROW
 EXECUTE FUNCTION trigger_archive();
+
+-- Gestion des droits par rôle
+-- Création du rôle administrateur
+CREATE ROLE netstream_admin WITH
+    LOGIN
+    PASSWORD 'mot_de_passe_securise'
+    CREATEDB
+    CREATEROLE
+    REPLICATION
+    BYPASSRLS;
+
+-- Création du rôle lecture seule pour les utilisateurs standards
+CREATE ROLE netstream_user WITH
+    LOGIN
+    PASSWORD 'mot_de_passe_utilisateur'
+    NOSUPERUSER
+    NOCREATEDB
+    NOCREATEROLE
+    NOINHERIT;
+
+-- Révocation de tous les droits existants sur les tables
+REVOKE ALL ON ALL TABLES IN SCHEMA public FROM PUBLIC;
+REVOKE ALL ON ALL SEQUENCES IN SCHEMA public FROM PUBLIC;
+REVOKE ALL ON ALL FUNCTIONS IN SCHEMA public FROM PUBLIC;
+
+-- Attribution des droits d'administration complets à l'administrateur
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO netstream_admin;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO netstream_admin;
+GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO netstream_admin;
+
+-- Attribution des droits de lecture seule aux utilisateurs standards
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO netstream_user;
+GRANT USAGE ON ALL SEQUENCES IN SCHEMA public TO netstream_user;
+
+-- Configuration pour que les nouvelles tables héritent automatiquement des permissions
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+    GRANT ALL ON TABLES TO netstream_admin;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+    GRANT SELECT ON TABLES TO netstream_user;
+
+
+
+-- sudo nano /etc/postgresql/16/main/pg_hba.conf
+-- local   all             netstream_user                          scram-sha-256
+-- local   all             netstream_admin                         scram-sha-256
+
+-- Exemple d'utilisation :
+-- sudo systemctl restart postgresql.service
+
+-- Pour se connecter en tant qu'administrateur :
+-- psql -U netstream_admin -d netstream
+
+-- Pour se connecter en tant qu'utilisateur standard :
+-- psql -U netstream_user -d netstream
+
 ```
 
 ## 📚 Documentation
