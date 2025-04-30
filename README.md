@@ -34,16 +34,16 @@ cd cda-p5-netstream-sky-planets
 ```
 ```sql
 -- Récupérer les films avec leur date, dans l'ordre de sortie
-SELECT titre, date_de_sortie
+SELECT titre_film, date_sortie_film
 FROM film
-ORDER BY date_de_sortie DESC;
+ORDER BY date_sortie_film DESC;
 
 -- Récupérer les acteurs de plus de 30 ans
 SELECT nom_acteur, prenom_acteur, age_acteur
 FROM (
   SELECT nom_acteur, prenom_acteur, TRUNC((CURRENT_DATE - date_de_naissance)/365.25) AS age_acteur
   FROM acteur
-)
+) AS subquery
 WHERE age_acteur > 30 
 ORDER BY nom_acteur;
 
@@ -76,8 +76,8 @@ FROM
     INNER JOIN role_film rf ON j.id_role = rf.id_role
     INNER JOIN film f ON rf.id_film = f.id_film
 WHERE 
-    a.nom_acteur ILIKE '%jack%' 
-    AND a.prenom_acteur ILIKE '%black%'
+    LOWER(a.nom_acteur) LIKE '%jack%' 
+    AND LOWER(a.prenom_acteur) LIKE '%black%'
 ORDER BY 
     f.titre;
 
@@ -91,14 +91,15 @@ VALUES ('Chris', 'Pratt', '1979-06-21');
 
 -- Modifier le titre du film
 UPDATE film
-SET titre = 'Super Mario Bros, le film'
+SET titre = 'Super Mario Bros, le film',
+    date_modification_film = NOW()
 WHERE titre = 'Mario Film';
 
 -- Afficher les 3 derniers acteurs ajoutés
 SELECT * 
 FROM acteur 
 LIMIT 3 OFFSET (
-    SELECT COUNT(0) - 3 FROM acteur
+    SELECT COUNT(*) - 3 FROM acteur
 );
 
 -- Supprimer un acteur
@@ -169,7 +170,8 @@ BEGIN
     UPDATE acteur 
     SET nom_acteur = COALESCE(p_nom_acteur, nom_acteur),
         prenom_acteur = COALESCE(p_prenom_acteur, prenom_acteur),
-        date_de_naissance = COALESCE(p_date_de_naissance, date_de_naissance)
+        date_de_naissance = COALESCE(p_date_de_naissance, date_de_naissance),
+        date_modification_acteur = NOW()
     WHERE id_acteur = p_id_acteur; 
 
     UPDATE jouer
@@ -262,7 +264,7 @@ AS $$
 BEGIN
     -- Prénom
     IF NEW.prenom_cinephile IS DISTINCT FROM OLD.prenom_cinephile THEN 
-        INSERT INTO archive (id_archive,id_cinephile,champ_modifie, ancienne_valeur, nouvelle_valeur, date_modification) VALUES(
+        INSERT INTO archive (id_archive,id_cinephile,champ_modifie, ancienne_valeur, nouvelle_valeur, date_mise_a_jour) VALUES(
             gen_random_uuid(),
             OLD.id_cinephile,
             'prenom_cinephile',
@@ -274,7 +276,7 @@ BEGIN
 
     -- Nom
     IF NEW.nom_cinephile IS DISTINCT FROM OLD.nom_cinephile THEN 
-        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_modification) VALUES(
+        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_mise_a_jour) VALUES(
             gen_random_uuid(),
             OLD.id_cinephile,
             'nom_cinephile',
@@ -286,7 +288,7 @@ BEGIN
 
     -- E-mail
     IF NEW.email IS DISTINCT FROM OLD.email THEN 
-        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_modification) VALUES(
+        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_mise_a_jour) VALUES(
             gen_random_uuid(),
             OLD.id_cinephile,
             'email',
@@ -298,7 +300,7 @@ BEGIN
     
     -- Mot de passe 
     IF NEW.mot_de_passe IS DISTINCT FROM OLD.mot_de_passe THEN 
-        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_modification) VALUES(
+        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_mise_a_jour) VALUES(
             gen_random_uuid(),
             OLD.id_cinephile,
             'mot_de_passe',
