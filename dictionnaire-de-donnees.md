@@ -7,12 +7,16 @@
 | titre            | Titre du film                        | AN   | -                          | 250    | Minecraft, le film                    |
 | annee_de_sortie  | L'année de sortie du film            | N    | -                          | 4      | 2025                                   |
 | duree            | Durée du film en minutes             | AN   | 00h 00m                    | 7      | 01h 41m                                |
+| date_creation_film | Date de création de l'enregistrement | Date-Heure   | AAAA-MM-JJ HH:MM:SS       | -      | 2024-03-14 15:30:00                   |
+| date_modification_film | Date de dernière modification | Date-Heure   | AAAA-MM-JJ HH:MM:SS       | -      | 2024-03-14 16:45:00                   |
 
 ## ROLE_FILM
 | Nom              | Description                          | Type | Format                     | Taille | Exemples                               |
 |------------------|--------------------------------------|------|----------------------------|--------|----------------------------------------|
 | id_role          | Identifiant du rôle                  | AN   | xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx | 36     | a6b12f6a-d1d3-41db-bafc-8df0055e5242   |
 | nom_role         | Nom du personnage joué par l'acteur  | AN   | -                          | 150    | Steve                                  |
+| date_creation_role | Date de création de l'enregistrement | Date-Heure   | AAAA-MM-JJ HH:MM:SS       | -      | 2024-03-14 15:30:00                   |
+| date_modification_role | Date de dernière modification | Date-Heure   | AAAA-MM-JJ HH:MM:SS       | -      | 2024-03-14 16:45:00                   |
 
 ## ACTEUR
 | Nom               | Description                          | Type | Format                     | Taille | Exemples                               |
@@ -21,6 +25,8 @@
 | nom_acteur        | Nom de l'acteur                      | A    | -                          | 50     | Black                                  |
 | prenom_acteur     | Prénom de l'acteur                   | A    | -                          | 50     | Jack                                   |
 | date_de_naissance | Date de naissance de l'acteur        | D    | JJ/MM/AAAA                 | 10     | 28/08/1969                             |
+| date_creation_acteur | Date de création de l'enregistrement | Date-Heure   | AAAA-MM-JJ HH:MM:SS       | -      | 2024-03-14 15:30:00                   |
+| date_modification_acteur | Date de dernière modification | Date-Heure   | AAAA-MM-JJ HH:MM:SS       | -      | 2024-03-14 16:45:00                   |
 
 ## CINEPHILE
 | Nom              | Description                          | Type | Format                     | Taille | Exemples                               |
@@ -30,6 +36,8 @@
 | prenom_cinephile | Prénom du cinéphile                  | A    | -                          | 50     | John                                   |
 | email            | E-mail du cinéphile                  | AN   | -                          | 320    | exemple@example.ex                     |
 | mot_de_passe     | Empreinte du mot de passe            | AN   | -                          | 72     | P0titChat! > `$argon2i$v=19$m=12,t=3,p=1$bHF3bTdmazdsNWEwMDAwMA$l3TBBjTnW3BbvU60aO0TPg` |
+| date_creation_cinephile | Date de création de l'enregistrement | Date-Heure   | AAAA-MM-JJ HH:MM:SS       | -      | 2024-03-14 15:30:00                   |
+| date_modification_cinephile | Date de dernière modification | Date-Heure   | AAAA-MM-JJ HH:MM:SS       | -      | 2024-03-14 16:45:00                   |
 
 ## RÉALISATEUR
 | Nom              | Description                          | Type | Format                     | Taille | Exemples                               |
@@ -37,8 +45,10 @@
 | id_realisateur   | Identifiant du réalisateur           | AN   | xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx | 36     | a6b12f6a-d1d3-41db-bafc-8df0055e5242   |
 | nom_realisateur  | Nom du réalisateur                   | A    | -                          | 50     | Hess                                   |
 | prenom_realisateur| Prénom du réalisateur                | A    | -                          | 50     | Jared                                  |
+| date_creation_realisateur | Date de création de l'enregistrement | Date-Heure   | AAAA-MM-JJ HH:MM:SS       | -      | 2024-03-14 15:30:00                   |
+| date_modification_realisateur | Date de dernière modification | Date-Heure   | AAAA-MM-JJ HH:MM:SS       | -      | 2024-03-14 16:45:00                   |
 
-## ARCHIVE_UTILISATEUR
+## ARCHIVE
 | Nom              | Description                          | Type | Format                     | Taille | Exemples                               |
 |------------------|--------------------------------------|------|----------------------------|--------|----------------------------------------|
 | id_archive       | Identifiant de l'entrée dans l'archive| AN   | xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx | 36     | a6b12f6a-d1d3-41db-bafc-8df0055e5242   |
@@ -47,3 +57,6 @@
 | ancienne_valeur  | Ancienne valeur du champ             | Texte | -                          | -      | Twitter                                |
 | nouvelle_valeur  | Nouvelle valeur du champ             | Texte | -                          | -      | X                                      |
 | date_modification| Date où le champ a été modifié       | Date-Heure | JJ/MM/AAAA hh:mm:ss      | 0      | 24/07/2023 11h43                      |
+| date_creation_archive | Date de création de l'enregistrement | Date-Heure   | AAAA-MM-JJ HH:MM:SS       | -      | 2024-03-14 15:30:00                   |
+| date_modification_archive | Date de dernière modification | Date-Heure   | AAAA-MM-JJ HH:MM:SS       | -      | 2024-03-14 16:45:00                   |
+
