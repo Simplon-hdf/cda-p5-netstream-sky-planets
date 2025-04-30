@@ -2,16 +2,16 @@
 CREATE OR REPLACE PROCEDURE update_film(
     IN p_id_film UUID,
     IN p_titre VARCHAR(250),
-    IN p_annee_de_sortie SMALLINT,
+    IN p_date_de_sortie SMALLINT,
     IN p_duree TIME,
-    IN p_id_realisateur UUID
+    IN p_id_realisateur UUID,
 )
 LANGUAGE plpgsql
 AS $$
 BEGIN 
     UPDATE film 
     SET titre = COALESCE(p_titre, titre),
-        annee_de_sortie = COALESCE(p_annee_de_sortie, annee_de_sortie),
+        date_de_sortie = COALESCE(p_date_de_sortie,date_de_sortie),
         duree = COALESCE(p_duree, duree),
         id_realisateur = COALESCE(p_id_realisateur, id_realisateur)
     WHERE id_film = p_id_film;
