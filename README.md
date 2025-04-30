@@ -169,7 +169,8 @@ BEGIN
     UPDATE acteur 
     SET nom_acteur = COALESCE(p_nom_acteur, nom_acteur),
         prenom_acteur = COALESCE(p_prenom_acteur, prenom_acteur),
-        date_de_naissance = COALESCE(p_date_de_naissance, date_de_naissance)
+        date_de_naissance = COALESCE(p_date_de_naissance, date_de_naissance),
+        date_creation_acteur = NOW()
     WHERE id_acteur = p_id_acteur; 
 
     UPDATE jouer
@@ -262,7 +263,7 @@ AS $$
 BEGIN
     -- Prénom
     IF NEW.prenom_cinephile IS DISTINCT FROM OLD.prenom_cinephile THEN 
-        INSERT INTO archive (id_archive,id_cinephile,champ_modifie, ancienne_valeur, nouvelle_valeur, date_modification) VALUES(
+        INSERT INTO archive (id_archive,id_cinephile,champ_modifie, ancienne_valeur, nouvelle_valeur, date_mise_a_jour) VALUES(
             gen_random_uuid(),
             OLD.id_cinephile,
             'prenom_cinephile',
@@ -274,7 +275,7 @@ BEGIN
 
     -- Nom
     IF NEW.nom_cinephile IS DISTINCT FROM OLD.nom_cinephile THEN 
-        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_modification) VALUES(
+        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_mise_a_jour) VALUES(
             gen_random_uuid(),
             OLD.id_cinephile,
             'nom_cinephile',
@@ -286,7 +287,7 @@ BEGIN
 
     -- E-mail
     IF NEW.email IS DISTINCT FROM OLD.email THEN 
-        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_modification) VALUES(
+        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_mise_a_jour) VALUES(
             gen_random_uuid(),
             OLD.id_cinephile,
             'email',
@@ -298,7 +299,7 @@ BEGIN
     
     -- Mot de passe 
     IF NEW.mot_de_passe IS DISTINCT FROM OLD.mot_de_passe THEN 
-        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_modification) VALUES(
+        INSERT INTO archive (id_archive, id_cinephile, champ_modifie, ancienne_valeur, nouvelle_valeur, date_mise_a_jour) VALUES(
             gen_random_uuid(),
             OLD.id_cinephile,
             'mot_de_passe',
